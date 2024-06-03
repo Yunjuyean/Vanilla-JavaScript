@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html 태그에 데이터저장</title>
+</head>
+<body>
+    <!-- p 태그에 data-content와 data-cls라는 사용자 정의 데이터 속성(data-* 속성)을 추가하여 데이터를 저장 -->
+    <p data-content="html 태그에 데이터를 저장한 것임"
+        data-cls="text-dark bg-white border">여기 글자 수정해줘</p>
+    <script>
+    // p 태그를 선택해서 ptag 변수에 저장
+    const ptag = document.querySelector("p");
+    // p 태그의 innerHTML(내용)을 data-content 속성의 값으로 변경
+    ptag.innerHTML = ptag.dataset.content;
+    // p 태그의 class를 data-cls 속성의 값으로 변경
+    ptag.classList = ptag.dataset.cls;
+    </script>
+
+<div id="box" style="display:inline-block">
+    버튼을 클릭해보세요.
+</div>
+<div class="btns">
+    <button data-bg="red" data-text="빨강색">1</button>
+    <button data-bg="yellow" data-text="노랑색">2</button>
+    <button data-bg="blue" data-text="파랑색">3</button>
+    <button data-bg="#ddccff" data-text="연보라색">4</button>
+</div>
+<div id="box">텍스트가 여기에 표시됩니다.</div>
+
+<script>
+    const targetbox = document.getElementById("box"); // 메서드 직접 연결
+    const btns = document.querySelectorAll(".btns button"); // 집합 forEach
+
+    btns.forEach(function(ele, idx){
+        ele.addEventListener('click', function(){
+            targetbox.innerHTML = this.dataset.text;
+            targetbox.style.backgroundColor = this.dataset.bg;
+            targetbox.style.fontSize = "24px"; // 텍스트 크기를 24px로 설정
+        })
+    })
+</script>
+
+
+
+
+<!-- <script>
+  const targetbox = document.getElementById("box");
+  document.querySelectorAll(".btns button").forEach(function(ele, idx){
+      console.log("각각의 버튼들: ",ele, "버튼들의 순번 :", idx  );
+      //보편적으로 for문보다 forEach는 여러개의 태그묶음을 상대로 한다.           
+       ele.addEventListener('click', function(){
+          console.log(this); // 꼭 먼저 확인하고 개발할 것
+          console.log(this.dataset.bg);
+          targetbox.style.backgroundColor = this.dataset.bg;
+          targetbox.innerHTML = this.dataset.text;
+       })
+  }) -->
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Animation Example</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease-in-out; /* 애니메이션 전환 효과 */
+        }
+    </style>
+</head>
+<body>
+    <div class="btns">
+        <button data-bg="red" data-text="빨강색">1</button>
+        <button data-bg="yellow" data-text="노랑색">2</button>
+        <button data-bg="blue" data-text="파랑색">3</button>
+        <button data-bg="#ddccff" data-text="연보라색">4</button>
+    </div>
+    <div id="box">텍스트가 여기에 표시됩니다.</div>
+
+    <script>
+        const targetbox = document.getElementById("box");
+        const btns = document.querySelectorAll(".btns button");
+
+        btns.forEach(function(ele) {
+            ele.addEventListener('click', function() {
+                targetbox.innerHTML = this.dataset.text;
+                targetbox.style.backgroundColor = this.dataset.bg;
+                animateText(targetbox);
+            });
+        });
+
+        function animateText(element) {
+            element.style.fontSize = "16px"; // 초기 폰트 크기
+            element.style.color = "#000"; // 초기 색상
+            let size = 16;
+            let color = 0;
+
+            const interval = setInterval(function() {
+                if (size >= 32 && color >= 255) {
+                    clearInterval(interval);
+                } else {
+                    size += 1;
+                    color += 15;
+                    element.style.fontSize = size + "px";
+                    element.style.color = `rgb(${color}, ${0}, ${0})`;
+                }
+            }, 50);
+        }
+    </script>
+</body>
+</html>
