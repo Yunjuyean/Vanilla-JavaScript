@@ -25,7 +25,7 @@ const hd_yys ={
     {
         Text : "정기배송",
         href : "misson.html",
-        cls : ["nav-mission me-5 gnb_li rel","d-block gnb_a","gnb_ul abs","gnb_ul_li"],
+        cls : ["nav-mission2 me-5 gnb_li rel","d-block gnb_a2","gnb_ul abs","gnb_ul_li"],
         gnb_ul_li : [
             {
                 Text : "후기",
@@ -44,7 +44,7 @@ const hd_yys ={
     {
         Text : "싱싱마켓",
         href : "misson.html",
-        cls : ["nav-mission me-5 gnb_li rel","d-block gnb_a","gnb_ul abs","gnb_ul_li"],
+        cls : ["nav-mission3 me-5 gnb_li rel","d-block gnb_a3","gnb_ul abs","gnb_ul_li"],
         gnb_ul_li : [
             {
                 Text : "인기상품",
@@ -59,7 +59,7 @@ const hd_yys ={
     {
         Text : "커뮤니티",
         href : "misson.html",
-        cls : ["nav-mission me-5 gnb_li rel","d-block gnb_a","gnb_ul abs","gnb_ul_li"],
+        cls : ["nav-mission4 me-5 gnb_li rel","d-block gnb_a4","gnb_ul abs","gnb_ul_li"],
         gnb_ul_li : [
             {
                 Text : "오늘의레시피",
@@ -90,27 +90,30 @@ const hd_yys ={
     ]
 }
 
-window.onload = function(){ 
+window.onload = function(){
     // onload는 화면이 로딩이 끝나면 실행되는 이벤트
-    // addEventListener와의 차이를 꼭 기록해둔다.
-    // onload 이벤트는 딱 한 번만 실행된다.
-    // 만약 2번쓰면 하나가 안 된다.
+    // addEventListener와의 차이를 꼭 기록해둔다.!!!!
+    // onload 이벤트는 딱 한번 실행된다. 주의!!!
+    // 만약 2번쓰면 하나가 안된다!
 
     let navitag = "";
 
     for(x in hd_yys.gnb){
-        navitag += `<li><a href='${hd_yys.gnb[x].href}'>${hd_yys.gnb[x].Text}</a></li>`
+        navitag += `<li class='${hd_yys.gnb[x].cls[0]}'>
+            <a href='${hd_yys.gnb[x].href}' class='${hd_yys.gnb[x].cls[1]}'>
+            ${hd_yys.gnb[x].Text}
+            </a>`;
+        navitag += `<ul>`;   
+        for(j in hd_yys.gnb[x].gnb_ul_li){
+            navitag +=`<li>
+               <a href='${hd_yys.gnb[x].gnb_ul_li[j].href}'>
+                    ${hd_yys.gnb[x].gnb_ul_li[j].Text}
+               </a>
+               </li>`  
+        }
+        navitag += `</ul>`;
+        navitag += `</li>`;     
     }
 
     document.querySelector("#gnb").innerHTML = navitag;
 }
-
-
-
-
-// document.getElementById("gnb").onclick=function(){
-
-// }
-
-
-// window.addEventListener('load focus', function(){})
